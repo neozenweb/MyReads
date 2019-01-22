@@ -1,14 +1,14 @@
 {
-  "main.css": "/MyReads/static/css/main.e02cc705.chunk.css",
-  "main.js": "/MyReads/static/js/main.c3df54da.chunk.js",
-  "main.js.map": "/MyReads/static/js/main.c3df54da.chunk.js.map",
-  "static/js/1.94d7c0e3.chunk.js": "/MyReads/static/js/1.94d7c0e3.chunk.js",
-  "static/js/1.94d7c0e3.chunk.js.map": "/MyReads/static/js/1.94d7c0e3.chunk.js.map",
+  "main.css": "/MyReads/static/css/main.e00793f9.chunk.css",
+  "main.js": "/MyReads/static/js/main.4f04325d.chunk.js",
+  "main.js.map": "/MyReads/static/js/main.4f04325d.chunk.js.map",
+  "static/js/1.faf4b866.chunk.js": "/MyReads/static/js/1.faf4b866.chunk.js",
+  "static/js/1.faf4b866.chunk.js.map": "/MyReads/static/js/1.faf4b866.chunk.js.map",
   "runtime~main.js": "/MyReads/static/js/runtime~main.970c0060.js",
   "runtime~main.js.map": "/MyReads/static/js/runtime~main.970c0060.js.map",
-  "static/css/main.e02cc705.chunk.css.map": "/MyReads/static/css/main.e02cc705.chunk.css.map",
-  "static/media/App.css": "/MyReads/static/media/add.bb9363b8.svg",
+  "static/css/main.e00793f9.chunk.css.map": "/MyReads/static/css/main.e00793f9.chunk.css.map",
+  "static/media/App.css": "/MyReads/static/media/arrow-back.3687aa98.svg",
   "index.html": "/MyReads/index.html",
-  "precache-manifest.d335fc9fd9e7ed788d795bf30cff2073.js": "/MyReads/precache-manifest.d335fc9fd9e7ed788d795bf30cff2073.js",
+  "precache-manifest.966ff9719b23a8a411dd3f0cfd779bce.js": "/MyReads/precache-manifest.966ff9719b23a8a411dd3f0cfd779bce.js",
   "service-worker.js": "/MyReads/service-worker.js"
 }
