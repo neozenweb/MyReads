@@ -6,52 +6,54 @@ import SearchBooks from './SearchBooks.js'
 import Books from './Books.js'
 import BookShelf from './BookShelf.js'
 import App from './App.css'
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch,
-} from 'react-router-dom';
+
 class BooksApp extends React.Component {
-  
+  searchBooks()
+{
+ //SearchBooks.searchBooks(""); 
+   this.setState({showSearchPage:true, books:[]});
+}
   state = {
     
     showSearchPage: false,
     books:[]
   }
 
-searchBooks()
-{
- SearchBooks.searchBooks(); 
-}
-  render() {
-    return (
-         <Router>    
-       <div className="app">
-       
-          
-     
-      <div><Link to="/SearchBooks"  ><button >Search</button></Link></div>
-     
-      <Switch>
-        <Route exact path="/"  component={Books}/>
-        <Route  exact path="/SearchBooks" component={SearchBooks} />
-         <Route  exact path="/BookShelf" component={BookShelf} render={() => (<BookShelf books={this.state.books} showSearchPage={this.state.showSearchPage} />)}  />
-		 
- 
-		
-      </Switch>
 
-       </div> 
-  </Router>
+  render() {
     
+      if(this.state.showSearchPage==false)
+          {
+            return (
+
+               <div className="app">
+
+
+
+              <div><button onClick={this.searchBooks.bind(this)}>Search</button></div>
+             <Books showSearchPage={false} books={this.state.books}/>
+
+
+               </div> );
+            }
+ 
+    else
+        {
+             return(
+                 
+                 <div className="app">
+
+             <SearchBooks showSearchPage={true} books={this.state.books}/>
+
+
+               </div> );
+            
+        }
         
         
         
                 
-      
-        
-        )
+    
 		}
       
   }

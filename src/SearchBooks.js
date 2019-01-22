@@ -19,7 +19,7 @@ searchBooks(qry)
  
   if(qry.length > 0)
   {
-  console.log("   QUERY IS   "+qry);
+  
 
  BooksAPI.search(qry,20).then(res=>this.setState({books:res}))
                  .catch(err => console.log(err));
@@ -28,27 +28,33 @@ searchBooks(qry)
 			this.setState({books:this.state.books.filter(bk=>bk.hasOwnProperty('shelf')== false)
                    .map((books) => {return {...books, 'shelf':'none'}})});
 }
-    this.state.books.map(bk=>console.log("ADDED Shelf to the books " + bk.title + " shelf " +bk.shelf));
-  this.state.books.map(bk=>BooksAPI.update(bk,'none').then(res=>console.log("SETTING Status for " + bk.title )).catch(err=>console.log("ERROR")));
+     this.state.books.map(bk=>BooksAPI.update(bk,'none').then(res=>console.log("SETTING Status for " + bk.title )).catch(err=>console.log("ERROR")));
                                  
   }
   else
   {
-  console.log("QUERY IS EMPTY" +qry.length);
     this.setState({books:[]});
    }
 }
- changeStatus(evnt)
+ changeStatus(evnt,bk)
 {
+    
+    alert("updating status of "+bk);
   const st =['','currentlyReading','wantToRead','read','none'];
- this.state.books.filter(book=>book.title===evnt.id).map(bknew =>bknew.shelf = st[evnt.selectedIndex]);
- this.state.books.filter(bk=>bk.title===evnt.id).map(bk=> BooksAPI.update(bk,st[evnt.selectedIndex]).then(res=>console.log("Changing and updating shelf for " + bk.title )).catch(err=>console.log("ERROR")));
+ /*this.state.books.filter(book=>book.title===evnt.id).map(bknew =>bknew.shelf = st[evnt.selectedIndex]);
+ this.state.books.filter(bk=>bk.title===evnt.id).map(bk=> BooksAPI.update(bk,st[evnt.selectedIndex]).then(bk=>bk).catch(err=>console.log("ERROR")));
    this.setState({});                         
- BooksAPI.getAll().then(res=>console.log(res));   
+ */
+    
+    BooksAPI.update(bk,st[evnt.selectedIndex])
+        .then(res=>console.log("updated status for " +bk))                                             
+         .catch(err=>console.log("ERROR in updating status for "+bk));
+   this.setState({}); 
+    
 }
 myPage(){
- BooksAPI.getAll().then(res=>console.log(res)); 
-  // location.href = "./";
+
+  this.setState({showSearchPage: false, books:[]});
 }
 
  renderBooks = () => {
@@ -68,7 +74,7 @@ return this.state.books.filter(bk=>bk.shelf!='read'&&bk.shelf!='wantToRead'&&bk.
 
 					<div className="book-shelf-changer">
 
-                      <select id={ `${book.title}` } onChange={evt => this.changeStatus(evt.target)}>
+                      <select id={ `${book.title}` } onChange={evt => this.changeStatus(evt.target,`${book.id}`)}>
                               <option >Select</option>
                                <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -90,10 +96,12 @@ return this.state.books.filter(bk=>bk.shelf!='read'&&bk.shelf!='wantToRead'&&bk.
 
 render() {
   
+if(this.state.showSearchPage==true)
+{
     return (
  		<div className="search-books">
             <div className="search-books-bar">
-          			<a className="close-search" onClick={evt=>this.myPage()}>Close</a>
+          			<a className="close-search" onClick={this.myPage.bind(this)}>Close</a>
 			
               <div className="search-books-input-wrapper" >
                 <input type="text" placeholder="Search by title or author" onChange={evt => this.searchBooks(evt.target.value)}/>
@@ -124,7 +132,13 @@ render() {
 	
 			
 )
-  			    
+}
+else{
+
+   return(<App showSearchPage={false} books={[this.state.books]}/>);
+
+
+}
          
 }
 
