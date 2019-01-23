@@ -39,22 +39,24 @@ searchBooks(qry)
  changeStatus(evnt,bk)
 {
     
-    alert("updating status of "+bk);
+    var updbook;
   const st =['','currentlyReading','wantToRead','read','none'];
+    this.state.books.filter(book=>book.id==bk).map(bknew =>{bknew.shelf = st[evnt.selectedIndex]; updbook = bknew;});
  /*this.state.books.filter(book=>book.title===evnt.id).map(bknew =>bknew.shelf = st[evnt.selectedIndex]);
  this.state.books.filter(bk=>bk.title===evnt.id).map(bk=> BooksAPI.update(bk,st[evnt.selectedIndex]).then(bk=>bk).catch(err=>console.log("ERROR")));
    this.setState({});                         
  */
     
-    BooksAPI.update(bk,st[evnt.selectedIndex])
-        .then(res=>console.log("updated status for " +bk))                                             
-         .catch(err=>console.log("ERROR in updating status for "+bk));
+    BooksAPI.update(updbook,st[evnt.selectedIndex])
+        .then(res=>console.log("updated status for " +updbook.title))                                             
+         .catch(err=>console.log("ERROR in updating status for "+updbook.title));
    this.setState({}); 
     
 }
 myPage(){
 
-  this.setState({showSearchPage: false, books:[]});
+      
+  this.setState({showSearchPage: false, books:[this.state.books]});
 }
 
  renderBooks = () => {
